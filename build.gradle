@@ -1,0 +1,66 @@
+plugins {
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+}
+
+loom {
+	mods {
+		"barrel_roll_handling" {
+			sourceSet sourceSets.main
+		}
+	}
+}
+
+
+repositories {
+	maven {
+		name = 'TerraformersMC'
+		url = 'https://maven.terraformersmc.com/releases'
+	}
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = 'Modrinth'
+				url = 'https://api.modrinth.com/maven'
+			}
+		}
+		filter {
+			includeGroup 'maven.modrinth'
+		}
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	compileOnly('com.terraformersmc:modmenu:21.0.0') {
+		transitive = false
+	}
+	// Only their APIs, and only when they are there: Do a Barrel Roll for the flight, YetAnotherConfigLib for its screen
+	compileOnly 'maven.modrinth:do-a-barrel-roll:3.8.5+26.3-fabric'
+	compileOnly 'maven.modrinth:yacl:3.9.7+26.3-fabric'
+}
+
+processResources {
+	def version = project.version
+	inputs.property "version", version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": version
+	}
+}
+
+jar {
+	def name = project.name
+	from("LICENSE") {
+		rename { "${it}_${name}" }
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 25
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+}

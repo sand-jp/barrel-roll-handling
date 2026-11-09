@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "barrel_roll_handling",
+	"version": "${version}",
+	"name": "Barrel Roll Handling",
+	"description": "Handling for Do a Barrel Roll's elytra flight: banking turns you, climbing and slow gliding let the nose drop, speed lifts it, and the roll can be limited. Five presets, smooth thrust, and walking keys let go on landing.",
+	"authors": ["sand-jp"],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/barrel-roll-handling",
+		"sources": "https://github.com/sand-jp/barrel-roll-handling",
+		"issues": "https://github.com/sand-jp/barrel-roll-handling/issues"
+	},
+	"license": "MIT",
+	"icon": "assets/barrel_roll_handling/icon.png",
+	"environment": "client",
+	"mixins": ["barrel_roll_handling.mixins.json"],
+	"entrypoints": {
+		"client": ["sand.barrelrollhandling.HandlingClient"],
+		"modmenu": ["sand.barrelrollhandling.client.HandlingModMenu"]
+	},
+	"depends": {
+		"fabricloader": ">=0.20.1",
+		"minecraft": "~26.3",
+		"java": ">=25"
+	},
+	"suggests": {
+		"do_a_barrel_roll": ">=3.8 <4",
+		"yet_another_config_lib_v3": ">=3.9"
+	}
+}
