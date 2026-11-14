@@ -44,10 +44,10 @@ public final class BarrelRollPulls {
 			return rotation;
 		}
 		double lookY = player.getLookAngle().y;
-		double[] turn = HandlingMath.turn(context.getCurrentRotation().roll(), lookY,
+		HandlingConfig config = HandlingConfig.current;
+		double[] turn = HandlingMath.turn(config, context.getCurrentRotation().roll(), lookY,
 				player.getDeltaMovement().length() * HandlingMath.TICKS_PER_SECOND, context.getRenderDelta());
 		RotationInstant pulled = rotation;
-		HandlingConfig config = HandlingConfig.current;
 		double right = turn[0];
 		if (config.rollLimit) {
 			// Here the rotation is still the player's own, after Do a Barrel Roll's sensitivity

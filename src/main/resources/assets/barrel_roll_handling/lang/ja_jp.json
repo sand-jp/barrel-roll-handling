@@ -95,5 +95,8 @@
 	"barrel_roll_handling.config.preset.apply": "適用",
 	"barrel_roll_handling.config.preset.apply.tooltip": "選んだプリセットを、旋回、機首、ロールの設定に入れる。推力、着地、Do a Barrel Roll 側の設定は変えない",
 	"barrel_roll_handling.config.preset.now": "今の設定:%s",
-	"barrel_roll_handling.yacl.preset_apply": "選んだプリセットを適用"
+	"barrel_roll_handling.yacl.preset_apply": "選んだプリセットを適用",
+	"barrel_roll_handling.config.roll_limit_degrees.tooltip": "左右それぞれ、これ以上は傾かなくなるロールの角度",
+	"key.barrel_roll_handling.yaw_roll_switch": "ヨーとロールの入れ替え(滑空中)",
+	"key.category.barrel_roll_handling.keys": "Barrel Roll Handling"
 }

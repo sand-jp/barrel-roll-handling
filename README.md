@@ -29,11 +29,12 @@ Each one can be switched off or tuned.
 - **Roll limit**: softly stops the roll at a set angle and turns the rest into a level turn.
 - **Smooth thrust and brake**: Do a Barrel Roll's thrust builds up and fades out gradually, and the brake slows you without flying you backward. Needs Do a Barrel Roll's thrust switched on, and allowed by the server.
 - **Landing lets go**: walking keys held when you land count as released until you let go of them, so the key you used to steer or brake doesn't walk you off a ledge. Choose "Back only" or "All" (all four, for when Do a Barrel Roll's yaw is on A/D). Works with controllers through Controlify, and without Do a Barrel Roll.
+- **Yaw and roll swap key**: while gliding, hold a key (left click by default) to swap yaw and roll, so the mouse turns you level instead of rolling.
 - **Five presets**, from Gentle to Very sharp. Pick one, apply it, then fine-tune.
 
 ### Requirements
 
-- Minecraft 26.3, Fabric Loader 0.20.1 or later, Java 25.
+- Minecraft 26.1 to 26.3 (26.1.x has its own file), Fabric Loader 0.20.1 or later, Java 25.
 - Client only. Nothing is needed on the server.
 - **Do a Barrel Roll 3.8 or later (below 4)** for the flight calculations. Without it, only "Landing lets go" works.
 - Optional: Mod Menu for the settings screen. With YetAnotherConfigLib it uses YACL's screen, otherwise its own screen with tabs.
@@ -78,11 +79,12 @@ Do a Barrel Roll やその作者とは無関係で、公認も受けていない
 - **ロールの上限**:決めた角度でロールを柔らかく止め、超えた分を水平の旋回に変える。
 - **滑らかな推力とブレーキ**:Do a Barrel Roll の推力が徐々に強まり、徐々に弱まる。ブレーキは後ろへ飛ばずに減速する。Do a Barrel Roll の推力をオンにし、サーバーが許可している必要がある。
 - **着地で離すキー**:着地の時に押していた歩くキーを、一度離すまで押していない扱いにする。舵やブレーキに使ったキーで、そのまま崖から歩き出さない。「後ろのみ」か「すべて」(前後左右。Do a Barrel Roll のヨーが A/D の時に)を選べる。Controlify 経由のコントローラーにも効き、Do a Barrel Roll が無くても使える。
+- **ヨーとロールの入れ替えキー**:滑空中、キー(初期は左クリック)を押している間、ヨーとロールが入れ替わる。マウスでロールの代わりに水平に旋回できる。
 - **プリセット5つ**:穏やかからとても鋭いまで。選んで適用してから、細かく調整できる。
 
 ### 動作環境
 
-- Minecraft 26.3、Fabric Loader 0.20.1 以上、Java 25。
+- Minecraft 26.1〜26.3(26.1.x は別のファイル)、Fabric Loader 0.20.1 以上、Java 25。
 - クライアントのみ。サーバーには何も要らない。
 - 飛行の計算には **Do a Barrel Roll 3.8 以上(4 未満)** が必要。無い時は「着地で離すキー」だけが動く。
 - 任意:設定画面に Mod Menu。YetAnotherConfigLib があればその画面、無ければタブ付きの独自の画面。

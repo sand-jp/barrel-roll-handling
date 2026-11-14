@@ -6,6 +6,7 @@ import com.google.gson.JsonParseException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.nio.file.AtomicMoveNotSupportedException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -114,10 +115,6 @@ public final class HandlingConfig {
 				HandlingConfig loaded = GSON.fromJson(Files.readString(PATH), HandlingConfig.class);
 				if (loaded != null) {
 					current = loaded;
-					// An unknown value in the file reads as null
-					if (current.landingRelease == null) {
-						current.landingRelease = LandingRelease.NONE;
-					}
 					current.keepInRange();
 				}
 			} catch (IOException | JsonParseException e) {
@@ -138,6 +135,10 @@ public final class HandlingConfig {
 	/** As the screen allows: a hand-edited file's numbers out of range, or not numbers, come back within it. */
 	public void keepInRange() {
 		HandlingConfig defaults = new HandlingConfig();
+		// An unknown value in the file reads as null
+		if (landingRelease == null) {
+			landingRelease = defaults.landingRelease;
+		}
 		bankLiftDegrees = clamp(bankLiftDegrees, 0, MAX_DEGREES);
 		bankYawPercent = clamp(bankYawPercent, 0, 100);
 		bankSinkDegrees = clamp(bankSinkDegrees, 0, MAX_DEGREES);
@@ -170,7 +171,12 @@ public final class HandlingConfig {
 			// Beside it first, then moved over it: a crash mid-write leaves the old file whole
 			Path written = PATH.resolveSibling(PATH.getFileName() + ".tmp");
 			Files.writeString(written, GSON.toJson(current));
-			Files.move(written, PATH, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+			try {
+				Files.move(written, PATH, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+			} catch (AtomicMoveNotSupportedException e) {
+				// Some file systems cannot swap it in one step
+				Files.move(written, PATH, StandardCopyOption.REPLACE_EXISTING);
+			}
 		} catch (IOException e) {
 			LOGGER.warn("Could not write {}", PATH, e);
 		}

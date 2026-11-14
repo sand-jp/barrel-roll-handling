@@ -39,6 +39,12 @@ public final class HandlingClient implements ClientModInitializer {
 		} catch (LinkageError e) {
 			LOGGER.warn("Do a Barrel Roll's API is not the one this was made for, so the flight pulls stay off", e);
 		}
+		HandlingKeys.add(HandlingKeys.YAW_ROLL_SWITCH);
+		try {
+			BarrelRollSwitch.register();
+		} catch (LinkageError e) {
+			LOGGER.warn("Do a Barrel Roll's API is not the one this was made for, so yaw and roll are not swapped", e);
+		}
 		try {
 			BarrelRollThrust.register();
 		} catch (LinkageError e) {

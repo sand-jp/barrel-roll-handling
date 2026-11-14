@@ -16,9 +16,9 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.tabs.GridLayoutTab;
-import net.minecraft.client.gui.components.tabs.MenuTabBar;
 import net.minecraft.client.gui.components.tabs.Tab;
 import net.minecraft.client.gui.components.tabs.TabManager;
+import net.minecraft.client.gui.components.tabs.TabNavigationBar;
 import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.options.OptionsSubScreen;
@@ -57,7 +57,7 @@ public class HandlingConfigScreen extends OptionsSubScreen {
 	private HandlingPreset chosen;
 	private final List<Tab> tabs = new ArrayList<>();
 	private TabManager tabManager;
-	private MenuTabBar tabBar;
+	private TabNavigationBar tabBar;
 
 	public HandlingConfigScreen(Screen parent) {
 		this(parent, PRESET, false, null);
@@ -84,7 +84,7 @@ public class HandlingConfigScreen extends OptionsSubScreen {
 		for (String name : TABS) {
 			tabs.add(new GridLayoutTab(Component.translatable(KEY + "tab." + name)));
 		}
-		tabBar = MenuTabBar.builder(tabManager, width).addTabs(tabs.toArray(Tab[]::new)).build();
+		tabBar = GameScreens.tabBar(tabManager, width, tabs.toArray(Tab[]::new));
 		addRenderableWidget(tabBar);
 		tabBar.selectTab(tab, false);
 		layout.setHeaderHeight(tabBar.getRectangle().height());
@@ -93,7 +93,7 @@ public class HandlingConfigScreen extends OptionsSubScreen {
 	@Override
 	protected void repositionElements() {
 		if (tabBar != null) {
-			tabBar.arrangeElements(width);
+			GameScreens.arrange(tabBar, width);
 			layout.setHeaderHeight(tabBar.getRectangle().height());
 		}
 		super.repositionElements();
@@ -110,7 +110,7 @@ public class HandlingConfigScreen extends OptionsSubScreen {
 
 	/** A new screen: rebuilding would keep the old list in the layout, under the new one and taking its clicks. */
 	private void reopen(int toTab) {
-		minecraft.gui.setScreen(new HandlingConfigScreen(lastScreen, toTab, barrelRollChanged, chosen));
+		GameScreens.open(minecraft, new HandlingConfigScreen(lastScreen, toTab, barrelRollChanged, chosen));
 	}
 
 	@Override

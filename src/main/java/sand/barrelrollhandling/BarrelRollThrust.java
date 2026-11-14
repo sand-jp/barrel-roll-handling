@@ -56,7 +56,7 @@ public final class BarrelRollThrust {
 				throttle = 0;
 			}
 			// Against a wall or a ceiling the push dies away as if let go, and builds again once free
-			boolean blocked = player.horizontalCollision && !player.minorHorizontalCollision || player.verticalCollision;
+			boolean blocked = (player.horizontalCollision && !player.minorHorizontalCollision) || player.verticalCollision;
 			throttle = HandlingMath.throttle(throttle, blocked ? 0 : input, config.thrustRiseSeconds, config.thrustFallSeconds);
 			lastPlayer = new WeakReference<>(player);
 			lastTick = tick;

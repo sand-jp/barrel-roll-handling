@@ -11,6 +11,13 @@ loom {
 }
 
 
+// The game's screens changed in 26.2: what differs is in a folder for each, and the older game gets a jar of its own
+def olderGame = project.minecraft_version.startsWith('26.1')
+sourceSets.main.java.srcDir(olderGame ? 'src/main/mc26_1/java' : 'src/main/mc26_2/java')
+if (olderGame) {
+	version = "${project.version}+26.1"
+}
+
 repositories {
 	maven {
 		name = 'TerraformersMC'
@@ -36,16 +43,18 @@ dependencies {
 		transitive = false
 	}
 	// Only their APIs, and only when they are there: Do a Barrel Roll for the flight, YetAnotherConfigLib for its screen
-	compileOnly 'maven.modrinth:do-a-barrel-roll:3.8.5+26.3-fabric'
-	compileOnly 'maven.modrinth:yacl:3.9.7+26.3-fabric'
+	compileOnly "maven.modrinth:do-a-barrel-roll:${olderGame ? '3.8.4+26.1-fabric' : '3.8.5+26.3-fabric'}"
+	compileOnly "maven.modrinth:yacl:${olderGame ? '3.9.7+26.1-fabric' : '3.9.7+26.3-fabric'}"
 }
 
 processResources {
 	def version = project.version
+	def games = olderGame ? '>=26.1 <26.2' : '>=26.2 <26.4'
 	inputs.property "version", version
+	inputs.property "games", games
 
 	filesMatching("fabric.mod.json") {
-		expand "version": version
+		expand "version": version, "games": games
 	}
 }
 

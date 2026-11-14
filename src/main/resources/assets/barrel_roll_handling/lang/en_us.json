@@ -95,5 +95,8 @@
 	"barrel_roll_handling.config.preset.apply": "Apply",
 	"barrel_roll_handling.config.preset.apply.tooltip": "Puts the chosen preset into the turn, nose and roll settings. The thrust, the landing and Do a Barrel Roll's own settings stay as they are",
 	"barrel_roll_handling.config.preset.now": "Now: %s",
-	"barrel_roll_handling.yacl.preset_apply": "Apply the chosen preset"
+	"barrel_roll_handling.yacl.preset_apply": "Apply the chosen preset",
+	"barrel_roll_handling.config.roll_limit_degrees.tooltip": "The roll, to either side, where leaning further stops",
+	"key.barrel_roll_handling.yaw_roll_switch": "Swap yaw and roll (gliding)",
+	"key.category.barrel_roll_handling.keys": "Barrel Roll Handling"
 }

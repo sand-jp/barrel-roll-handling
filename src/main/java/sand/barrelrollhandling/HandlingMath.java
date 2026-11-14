@@ -83,7 +83,7 @@ public final class HandlingMath {
 	 * A soft range of none stops it hard at the limit.
 	 */
 	public static double limitRoll(double rollInput, double roll, double limitDegrees, double softDegrees) {
-		if (rollInput == 0 || Math.signum(rollInput) != Math.signum(roll) && roll != 0) {
+		if (rollInput == 0 || (Math.signum(rollInput) != Math.signum(roll) && roll != 0)) {
 			return rollInput;
 		}
 		double left = Math.max(0, limitDegrees - Math.abs(roll));
@@ -104,7 +104,7 @@ public final class HandlingMath {
 	 */
 	public static double[] easeAtPole(double right, double up, double lookY) {
 		double near = nearPole(lookY);
-		boolean towardPole = up < 0 && lookY < 0 || up > 0 && lookY > 0;
+		boolean towardPole = (up < 0 && lookY < 0) || (up > 0 && lookY > 0);
 		return new double[] {right * near, towardPole ? up * near : up};
 	}
 
@@ -135,8 +135,7 @@ public final class HandlingMath {
 	 * below); then the pitch on the camera's own axes, down counting up. A positive roll leans to the right. The frame
 	 * without the roll is eased at the poles; the camera's own axes need no easing.
 	 */
-	public static double[] turn(double roll, double lookY, double speed, double seconds) {
-		HandlingConfig config = HandlingConfig.current;
+	public static double[] turn(HandlingConfig config, double roll, double lookY, double speed, double seconds) {
 		double right = 0;
 		double up = 0;
 		double belly = 0;

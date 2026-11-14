@@ -56,8 +56,8 @@ public final class LandingRelease {
 		if (holdForward || holdBack || holdLeft || holdRight) {
 			input.keyPresses = new Input(keys.forward() && !holdForward, keys.backward() && !holdBack, keys.left() && !holdLeft,
 					keys.right() && !holdRight, keys.jump(), keys.shift(), keys.sprint());
-			boolean dropY = holdForward && move.y > 0 || holdBack && move.y < 0;
-			boolean dropX = holdLeft && move.x > 0 || holdRight && move.x < 0;
+			boolean dropY = (holdForward && move.y > 0) || (holdBack && move.y < 0);
+			boolean dropX = (holdLeft && move.x > 0) || (holdRight && move.x < 0);
 			((ClientInputAccessor) input).barrelRollHandling$setMoveVector(new Vec2(dropX ? 0 : move.x, dropY ? 0 : move.y));
 		}
 	}
